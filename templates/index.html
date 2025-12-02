@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Construction DX: Work Permit System</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; padding: 40px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 20px; }
+        
+        /* Form Styling */
+        form { background: #e8f6f3; padding: 20px; border-radius: 8px; border-left: 6px solid #27ae60; margin-bottom: 40px; }
+        h3 { margin-top: 0; color: #2c3e50; }
+        input, select { padding: 10px; margin: 5px; width: 28%; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px 20px; background-color: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #219150; }
+        
+        /* Table Styling */
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 15px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background-color: #34495e; color: white; }
+        
+        /* Status Tags */
+        .status-Pending { color: #e67e22; font-weight: bold; background: #fdf2e9; padding: 5px 10px; border-radius: 15px; }
+        .status-APPROVED { color: #27ae60; font-weight: bold; background: #eafaf1; padding: 5px 10px; border-radius: 15px; }
+        
+        .btn-approve { text-decoration: none; background-color: #2980b9; color: white; padding: 8px 12px; border-radius: 4px; font-size: 0.9em; }
+        .btn-approve:hover { background-color: #1f618d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ Digital Work Permit System (DX Prototype)</h1>
+        
+        <form action="/submit" method="POST">
+            <h3>👷 Step 1: Request New Permit</h3>
+            <input type="text" name="worker_name" placeholder="Worker Name (e.g. Rahul)" required>
+            <input type="text" name="location" placeholder="Location (e.g. Zone B, Floor 2)" required>
+            <select name="hazard_type">
+                <option value="Height Work">Height Work (>2m)</option>
+                <option value="Hot Work">Hot Work (Welding/Cutting)</option>
+                <option value="Confined Space">Confined Space</option>
+                <option value="Electrical">Electrical Maintenance</option>
+            </select>
+            <button type="submit">Submit Request</button>
+        </form>
+
+        <h3>📋 Step 2: Safety Manager Dashboard</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Worker</th>
+                    <th>Task / Hazard</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for permit in permits %}
+                <tr>
+                    <td>#{{ permit[0] }}</td>
+                    <td>{{ permit[1] }}</td>
+                    <td>{{ permit[3] }}</td>
+                    <td>{{ permit[2] }}</td>
+                    <td><span class="status-{{ permit[4].split()[0] }}">{{ permit[4] }}</span></td>
+                    <td>
+                        {% if permit[4] == 'Pending Review' %}
+                        <a href="/approve/{{ permit[0] }}" class="btn-approve">✔ Approve Permit</a>
+                        {% else %}
+                        <span style="color: grey;">Locked</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
