@@ -74,6 +74,17 @@ python app.py
 
 ---
 
+## 🔧 Troubleshooting (Windows Users)
+
+If you see a **"running scripts is disabled"** error when trying to activate the environment, run this command in PowerShell to allow script execution:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+```
+*Then try running `.\venv\Scripts\activate` again.*
+
+---
+
 ## 👤 Author
 **Gaurav Dev**
 * *Focus:* Safety-Critical Systems, Process Automation, Formal Methods.
