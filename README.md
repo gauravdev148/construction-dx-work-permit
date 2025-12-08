@@ -2,7 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
 ![Logic](https://img.shields.io/badge/Logic-Finite_State_Machine-red)
-![Status](https://img.shields.io/badge/Status-Prototype-green)
+![Status](https://img.shields.io/badge/Status-Research_Prototype-green)
 
 **A deterministic state-machine system for enforcing safety protocol compliance.**
 
@@ -24,6 +24,8 @@ This project models the "Permit-to-Work" (PTW) process as a **Finite State Machi
 * **Process Enforcement:**
     * **Safety Check Constraint:** Work cannot begin until the safety verification state is successfully resolved.
     * **Auditability:** Every state change is tracked and validated against the logic model.
+* **Visual Status Tracking:**
+    * Provides a clear, linear view of the safety workflow for site managers.
 
 ---
 
@@ -35,26 +37,43 @@ This project models the "Permit-to-Work" (PTW) process as a **Finite State Machi
 | **Backend** | Flask | Web Interface & API |
 | **Frontend** | Bootstrap 5 | Visual State Diagram |
 
+```python
+# Logic Sample: Strict Transition Rules
+transitions = [
+    {'trigger': 'verify_safety', 'source': 'requested', 'dest': 'safety_check'},
+    {'trigger': 'manager_approve', 'source': 'safety_check', 'dest': 'approved'},
+    # If a user tries to skip 'safety_check', the system rejects the action.
+]
+```
+
 ---
 
 ## ⚡ How to Run
 
 ### 1. Setup Environment
 ```bash
+# Create Virtual Environment (Sandbox)
 python -m venv venv
+
+# Activate (Windows)
 .\venv\Scripts\activate
+
+# Install Dependencies (Flask + Transitions)
 pip install -r requirements.txt
-2. Launch Application
-Bash
+```
 
+### 2. Launch Application
+```bash
+# Navigate to the Source Folder
 cd src
+
+# Start the Logic Engine
 python app.py
-Access the system at: http://127.0.0.1:5002
+```
+*Access the system at:* `http://127.0.0.1:5002`
 
+---
 
-
-# 👤 Author
-
-*Gaurav Dev
-
-*Focus: Safety-Critical Systems, Process Automation.
+## 👤 Author
+**Gaurav Dev**
+* *Focus:* Safety-Critical Systems, Process Automation, Formal Methods.
