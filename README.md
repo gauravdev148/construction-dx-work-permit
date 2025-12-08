@@ -51,7 +51,10 @@ cd src
 python app.py
 Access the system at: http://127.0.0.1:5002
 
-👤 Author
-Gaurav Dev
 
-Focus: Safety-Critical Systems, Process Automation.
+
+# 👤 Author
+
+*Gaurav Dev
+
+*Focus: Safety-Critical Systems, Process Automation.
