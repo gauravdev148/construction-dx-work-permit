@@ -44,3 +44,14 @@ This project models the "Permit-to-Work" (PTW) process as a **Finite State Machi
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
+2. Launch Application
+Bash
+
+cd src
+python app.py
+Access the system at: http://127.0.0.1:5002
+
+👤 Author
+Gaurav Dev
+
+Focus: Safety-Critical Systems, Process Automation.
